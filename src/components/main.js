@@ -8,7 +8,9 @@ class Ideas extends React.Component {
 
 
         // Expected initial data set
-        this.state = {};
+        this.state = {
+            test: true
+        };
     }
     componentWillMount() {
 
@@ -21,24 +23,37 @@ class Ideas extends React.Component {
 
 
     }
-    parentClickHandler(e) {
+    removeElement(el) {
 
-        console.log('parentClickHandler clicked!');
+    }
+    handleFilterChange(e) {
+        // this.removeElement(e.target);
+
+        console.log('handleFilterChange changed!', e);
+        this.setState({
+            'test': false
+        })
     }
     render() {
-        return (
-            <div>
-                <h2>Ideas</h2>
-                <p>List all ideas</p>
-                {
-                    this.props.initialCount.map(function(item, i) {
-                      return (
-                            <Tile onClick={this.parentClickHandler.bind(this, i)} key={i} {...item}></Tile>
-                          );
-                    }, this)
-                }
-              </div>
-        );
+        if (this.state.test === true) {
+            return (
+                <div>
+                    <h2>Ideas</h2>
+                    <p>List all ideas</p>
+                    
+                        {
+                            this.props.initialCount.map(function(item, i) {
+                              return (
+                                    <Tile handleFilterChange={this.handleFilterChange.bind(this)} key={i} {...item}></Tile>
+                                  );
+                            }, this)
+                        
+                    } 
+                  </div>
+            );
+        } else {
+            return <h1>BLAH BLAH</h1>
+        }
     }
 
 }

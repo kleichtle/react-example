@@ -22,6 +22,7 @@ class Tile extends React.Component {
     titleClickHandler(e){
 
         console.log('title - clicked!');
+
     }
     render() {
 
@@ -29,7 +30,7 @@ class Tile extends React.Component {
 
             <div style={{margin: 10 + 'px', border: 1+'px solid #cc0000', padding: 10+'px'}} >
                 <div>
-                    <span >Title:</span> {this.props.title}
+                    <span onClick={this.props.handleFilterChange}>Title:</span> {this.props.title}
                 </div>
 
             </div>
