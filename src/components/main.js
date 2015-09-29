@@ -1,18 +1,58 @@
 import React from 'react';
-import {RouteHandler, Link} from 'react-router';
+import Tile from './Tile';
 
-class Main extends React.Component {
 
-  render() {
-    return (
-      <div>
-        <h1>Example boo</h1>
-        <Link to='example'>Go to Example page...</Link>
-        <RouteHandler />
-      </div>
-    );
-  }
+class Ideas extends React.Component {
+    constructor(props) {
+        super(props);
+
+
+        // Expected initial data set
+        this.state = {};
+    }
+    componentWillMount() {
+
+
+    }
+    componentWillUnmount() {
+
+    }
+    componentDidMount() {
+
+
+    }
+    parentClickHandler(e) {
+
+        console.log('parentClickHandler clicked!');
+    }
+    render() {
+        return (
+            <div>
+                <h2>Ideas</h2>
+                <p>List all ideas</p>
+                {
+                    this.props.initialCount.map(function(item, i) {
+                      return (
+                            <Tile onClick={this.parentClickHandler.bind(this, i)} key={i} {...item}></Tile>
+                          );
+                    }, this)
+                }
+              </div>
+        );
+    }
 
 }
+Ideas.propTypes = {
+    initialCount: React.PropTypes.array
+};
+Ideas.defaultProps = {
+    initialCount: [{
+        title: 'hi'
+    }, {
+        title: 'hello'
+    }, {
+        title: 'bye'
+    }]
+};
 
-export default Main;
+export default Ideas;

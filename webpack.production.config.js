@@ -5,7 +5,6 @@ var webpack = require('webpack'),
   path = require('path'),
   srcPath = path.join(__dirname, 'src');
 
-
 module.exports = {
   target: 'web',
   cache: true,
@@ -36,17 +35,8 @@ module.exports = {
     ]
   },
   plugins: [
-  new webpack.optimize.LimitChunkCountPlugin({maxChunks: 15}),
-  new webpack.optimize.MinChunkSizePlugin({minChunkSize: 10000}),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin([{sourceMap: false}]),
-    new webpack.DefinePlugin({
-      'process.env': {
-        // This has effect on the react lib size
-        'NODE_ENV': JSON.stringify('production'),
-      },
-    }),
     new webpack.optimize.CommonsChunkPlugin('common', 'common.js'),
+    new webpack.optimize.UglifyJsPlugin([{}]),
     new HtmlWebpackPlugin({
       inject: true,
       template: 'src/index.html'
@@ -54,7 +44,7 @@ module.exports = {
     new webpack.NoErrorsPlugin()
   ],
 
-  debug: false,
+  debug: true,
   devtool: 'eval-cheap-module-source-map',
   devServer: {
     contentBase: './tmp',
