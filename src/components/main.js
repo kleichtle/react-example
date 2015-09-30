@@ -1,6 +1,6 @@
 import React from 'react';
-import Tile from './Tile';
-
+import Tile from './tile';
+import InputTile from './input-tile';
 
 class Ideas extends React.Component {
     constructor(props) {
@@ -9,9 +9,13 @@ class Ideas extends React.Component {
 
         // Expected initial data set
         this.state = {
-            test: true
+            changeContent: true,
+            initialCount: this.props.initialCount,
+            inputText: ''
         };
+
     }
+
     componentWillMount() {
 
 
@@ -23,37 +27,58 @@ class Ideas extends React.Component {
 
 
     }
-    removeElement(el) {
+
+    removeItem(id) {
+        // this.removeElement(e.target);
+        // e.persist();
+        console.log('removeItem changed!', id);
+
+
+        this.state.initialCount.splice(id, 1);
+        this.setState({
+            'initialCount': this.state.initialCount
+        });
+
+
 
     }
-    handleFilterChange(e) {
-        // this.removeElement(e.target);
+    handleInputEnter(e) {
+        // http://stackoverflow.com/questions/22123055/react-keyboard-event-handlers-all-null
+        // NOTE: don't forget to remove it post debug
+        // e.persist();
 
-        console.log('handleFilterChange changed!', e);
+
+        let inputText = e.target.value;
+
+        this.state.initialCount.push({
+            title: inputText
+        });
+
         this.setState({
-            'test': false
-        })
+            'initialCount': this.state.initialCount
+        });
+
+
     }
     render() {
-        if (this.state.test === true) {
-            return (
-                <div>
-                    <h2>Ideas</h2>
-                    <p>List all ideas</p>
-                    
-                        {
-                            this.props.initialCount.map(function(item, i) {
-                              return (
-                                    <Tile handleFilterChange={this.handleFilterChange.bind(this)} key={i} {...item}></Tile>
-                                  );
-                            }, this)
-                        
-                    } 
-                  </div>
-            );
-        } else {
-            return <h1>BLAH BLAH</h1>
-        }
+
+        return (
+            <div>
+                <h2>Ideas</h2>
+                <p>List all ideas</p>
+                
+                {
+                    this.state.initialCount.map(function(item, i) {
+                        return (
+                            <Tile removeItem={this.removeItem.bind(this, i)} key={i} {...item}></Tile>
+                        );
+                    }, this)
+                
+                }
+                <InputTile handleInputEnter={this.handleInputEnter.bind(this)} />
+            </div>
+        );
+
     }
 
 }

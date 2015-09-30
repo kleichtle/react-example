@@ -1,6 +1,16 @@
 {
     "rules": {
-        "no-console": false,
+        "yoda": [
+            2, 
+            "never"
+        ],
+        "strict": [
+            2, 
+            "global"
+        ],
+        "no-console": [
+            0
+        ],
         "indent": [
             2,
             4
@@ -16,7 +26,12 @@
         "semi": [
             2,
             "always"
-        ]
+        ],
+        "eqeqeq": 2,
+        "yoda": 2,
+        "react/jsx-uses-react": 2,
+        "react/jsx-uses-vars": 2,
+        "react/react-in-jsx-scope": 2
     },
     "env": {
         "es6": true,
