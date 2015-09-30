@@ -1,5 +1,5 @@
 import React from 'react';
-import Tile from './tile';
+import TitleItem from './title-item';
 import InputTile from './input-tile';
 
 class Ideas extends React.Component {
@@ -70,7 +70,7 @@ class Ideas extends React.Component {
                 {
                     this.state.initialCount.map(function(item, i) {
                         return (
-                            <Tile removeItem={this.removeItem.bind(this, i)} key={i} {...item}></Tile>
+                            <TitleItem removeItem={this.removeItem.bind(this, i)} key={i} {...item}></TitleItem>
                         );
                     }, this)
                 
